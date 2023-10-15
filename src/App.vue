@@ -1,22 +1,15 @@
 <template>
   <div id="app" class="dark-theme">
-    <DarkModeScreen />
+    <ListTalks />
   </div>
 </template>
 
 <script>
-import DarkModeScreen from "@/components/DarkModeScreen.vue";
-
+import ListTalks from "@/screens/Talk/ListTalks.vue";
 export default {
   name: "App",
   components: {
-    DarkModeScreen,
+    ListTalks,
   },
 };
 </script>
-
-<style>
-.dark-theme {
-  background-color: #222;
-}
-</style>
