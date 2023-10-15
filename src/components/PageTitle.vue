@@ -16,7 +16,7 @@ export default {
 
 <style scoped>
 .title {
-	font-size: 2rem;
+	font-size: 4rem;
 	margin-top: 2rem;
 	margin-bottom: 2rem;
 	color: #f40;

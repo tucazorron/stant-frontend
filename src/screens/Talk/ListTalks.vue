@@ -1,8 +1,16 @@
 <template>
 	<div class="centered-container">
 		<PageTitle title="Palestras" />
-		<div class="button-container">
-			<NewButton label="Criar Palestra"></NewButton>
+		<div margin-bottom="10px">
+			<button type="button" class="btn btn-primary" @click="createNewTalk">
+				Criar palestra
+			</button>
+			<button type="button" class="btn btn-success" @click="renderSchedule">
+				Criar cronograma de palestras
+			</button>
+			<button type="button" class="btn btn-danger" @click="deleteAllTalks">
+				Excluir todas as palestras
+			</button>
 		</div>
 		<div>
 			<table class="table table-dark table-striped">
@@ -21,12 +29,15 @@
 						<td>{{ talk.title }}</td>
 						<td>{{ talk.duration }}</td>
 						<td>
-							<a class="icon-link" href="`/talk/${{ talk.id }}`">
+							<a class="icon-link" :href="`/talk/${talk.id}`">
 								<i class="fas fa-edit"></i>
 							</a>
+
 						</td>
 						<td>
-							<i class="fas fa-trash"></i>
+							<a class="icon-link" @click="deleteTalk(`${talk.id}`)">
+								<i class="fas fa-trash"></i>
+							</a>
 						</td>
 
 					</tr>
@@ -38,13 +49,11 @@
   
 <script>
 import axios from 'axios';
-import NewButton from "@/components/NewButton.vue";
 import { baseUrl } from "../constants";
 import PageTitle from '@/components/PageTitle.vue';
 export default {
 	name: 'ListTalks',
 	components: {
-		NewButton,
 		PageTitle
 	},
 	data() {
@@ -64,6 +73,45 @@ export default {
 				console.error('API request failed:', error);
 			});
 	},
+	methods: {
+		deleteTalk(id) {
+			axios.delete(`${baseUrl}/talks/${id}`)
+				.then((response) => {
+					console.log('Palestra deletada:', response.data);
+					this.talks = this.talks.filter((talk) => talk.id !== id);
+					location.reload();
+				})
+				.catch((error) => {
+					console.error('API request failed:', error);
+				});
+		},
+		deleteAllTalks() {
+			axios.delete(`${baseUrl}/talks`)
+				.then((response) => {
+					console.log('Palestras deletadas:', response.data);
+					this.talks = [];
+					location.reload();
+				})
+				.catch((error) => {
+					console.error('API request failed:', error);
+				});
+		},
+		renderSchedule() {
+			this.$router.push('/schedule');
+			// axios.get(`${baseUrl}/schedule`)
+			// 	.then((response) => {
+			// 		console.log('Cronograma:', response.data);
+			// 		this.talks = response.data;
+			// 		this.dataFetched = true;
+			// 	})
+			// 	.catch((error) => {
+			// 		console.error('API request failed:', error);
+			// 	});
+		},
+		createNewTalk() {
+			this.$router.push('/talk/new');
+		},
+	},
 };
 </script>
 
@@ -74,28 +122,6 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-}
-
-.title {
-	font-size: 3rem;
-	margin-bottom: 20px;
-}
-
-.button-container {
-	display: flex;
-}
-
-.button {
-	background-color: #007bff;
-	color: #fff;
-	padding: 10px 20px;
-	margin: 0 10px;
-	border: none;
-	cursor: pointer;
-}
-
-.button:hover {
-	background-color: #0056b3;
 }
 </style>
   
