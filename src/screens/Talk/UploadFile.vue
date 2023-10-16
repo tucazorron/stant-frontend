@@ -2,10 +2,7 @@
     <div class="centered-container">
         <PageTitle title="Upload de arquivo" />
         <div class="buttons-row">
-            <button type="button" class="btn btn-primary" @click="redirectCreateTalk">
-                Criar palestra
-            </button>
-            <button type="button" class="btn btn-success" @click="redirectListTalks">
+            <button type="button" class="btn btn-light" @click="redirectListTalks">
                 Listagem de palestras
             </button>
         </div>
@@ -38,19 +35,17 @@ export default {
             formData.append('file', this.file);
             axios.post(`${baseUrl}/upload-file`, formData)
                 .then((response) => {
-                    alert('Arquivo enviado com sucesso!')
                     console.log(response);
+                    alert('Arquivo enviado com sucesso!')
+                    this.redirectListTalks();
                 })
                 .catch((error) => {
-                    alert('Erro ao enviar arquivo!')
                     console.error(error);
+                    alert('Erro ao enviar arquivo!')
                 });
         },
-        redirectCreateTalk() {
-            this.$router.push('/talk/new');
-        },
         redirectListTalks() {
-            this.$router.push('/');
+            this.$router.push({ name: 'home' });
         },
     },
 };

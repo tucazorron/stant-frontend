@@ -2,7 +2,7 @@
 	<div class="centered-container">
 		<PageTitle title="Criar Palestra" />
 		<div class="buttons-row">
-			<button type="button" class="btn btn-success" @click="redirectListTalks">
+			<button type="button" class="btn btn-light" @click="redirectListTalks">
 				Listagem de palestras
 			</button>
 		</div>
@@ -44,16 +44,16 @@ export default {
 			console.log(this.requestBody)
 			axios.post(`${baseUrl}/talks`, this.requestBody)
 				.then((response) => {
-					alert('Palestra criada com sucesso!')
 					console.log(response);
+					alert('Palestra criada com sucesso!');
 				})
 				.catch((error) => {
-					alert('Erro ao criar palestra!')
-					console.error('API request failed:', error);
+					console.error(error);
+					alert('Erro ao criar palestra!');
 				});
 		},
 		redirectListTalks() {
-			this.$router.push('/');
+			this.$router.push({ name: 'home' });
 		},
 	},
 };

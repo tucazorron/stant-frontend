@@ -5,7 +5,7 @@
 			<button type="button" class="btn btn-primary" @click="redirectCreateTalk">
 				Criar palestra
 			</button>
-			<button type="button" class="btn btn-primary" @click="redirectUploadFile">
+			<button type="button" class="btn btn-warning" @click="redirectUploadFile">
 				Subir arquivo de palestras
 			</button>
 			<button type="button" class="btn btn-success" @click="redirectSchedule">
@@ -32,7 +32,7 @@
 						<td>{{ talk.title }}</td>
 						<td>{{ talk.duration }}</td>
 						<td>
-							<a class="icon-link" :href="`/talk/${talk.id}`">
+							<a class="icon-link" @click="redirectEditTalk(`${talk.id}`)">
 								<i class="fas fa-edit"></i>
 							</a>
 
@@ -68,46 +68,53 @@ export default {
 	beforeCreate() {
 		axios.get(`${baseUrl}/talks`)
 			.then((response) => {
+				console.log(response);
 				this.talks = response.data;
 				this.dataFetched = true;
 			})
 			.catch((error) => {
-				console.error('API request failed:', error);
+				console.error(error);
+				alert('Erro ao buscar palestras!')
 			});
 	},
 	methods: {
 		deleteTalk(id) {
 			axios.delete(`${baseUrl}/talks/${id}`)
-				.then(() => {
+				.then((response) => {
+					console.log(response);
 					alert('Palestra deletada com sucesso!')
 					this.talks = this.talks.filter((talk) => talk.id !== id);
 					location.reload();
 				})
 				.catch((error) => {
-					alert('Erro ao deletar palestra!')
 					console.error(error);
+					alert('Erro ao deletar palestra!')
 				});
 		},
 		deleteAllTalks() {
 			axios.delete(`${baseUrl}/talks`)
-				.then(() => {
+				.then((response) => {
+					console.log(response);
 					alert('Todas as palestras foram deletadas com sucesso!')
 					this.talks = [];
 					location.reload();
 				})
 				.catch((error) => {
-					alert('Erro ao deletar todas as palestras!')
 					console.error(error);
+					alert('Erro ao deletar todas as palestras!')
 				});
 		},
 		redirectSchedule() {
-			this.$router.push('/schedule');
+			this.$router.push({ name: 'schedule' });
 		},
 		redirectCreateTalk() {
-			this.$router.push('/talk/new');
+			this.$router.push({ name: 'create-talk' });
 		},
 		redirectUploadFile() {
-			this.$router.push('/upload-file');
+			this.$router.push({ name: 'upload-file' });
+		},
+		redirectEditTalk(id) {
+			this.$router.push({ name: 'edit-talk', params: { id } });
 		},
 	},
 };

@@ -12,7 +12,7 @@ const routes = [
         component: ListTalks,
     },
     {
-        path: "/talk/new",
+        path: "/create-talk",
         name: "create-talk",
         component: CreateTalk,
     },

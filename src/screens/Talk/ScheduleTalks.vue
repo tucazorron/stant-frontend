@@ -2,7 +2,7 @@
     <div class="centered-container">
         <PageTitle title="Cronograma das palestras" />
         <div class="buttons-row">
-            <button type="button" class="btn btn-success" @click="redirectListTalks">
+            <button type="button" class="btn btn-light" @click="redirectListTalks">
                 Listagem de palestras
             </button>
         </div>
@@ -45,18 +45,19 @@ export default {
     },
     methods: {
         redirectListTalks() {
-            this.$router.push('/');
+            this.$router.push({ name: 'home' });
         },
     },
     beforeCreate() {
         axios.get(`${baseUrl}/schedule`)
             .then((response) => {
-                this.schedule = response.data;
                 console.log(this.schedule);
+                this.schedule = response.data;
                 this.dataFetched = true;
             })
             .catch((error) => {
-                console.error('API request failed:', error);
+                console.error(error);
+                alert('Erro ao buscar cronograma de palestras!')
             });
     },
 };

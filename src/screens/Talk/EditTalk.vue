@@ -2,11 +2,8 @@
     <div class="centered-container">
         <PageTitle title="Editar Palestra" />
         <div class="buttons-row">
-            <button type="button" class="btn btn-success" @click="redirectListTalks">
+            <button type="button" class="btn btn-light" @click="redirectListTalks">
                 Listagem de palestras
-            </button>
-            <button type="button" class="btn btn-primary" @click="redirectCreateTalk">
-                Criar palestra
             </button>
         </div>
         <form>
@@ -46,19 +43,17 @@ export default {
         editTalk() {
             axios.put(`${baseUrl}/talks/${this.$route.params.id}`, this.requestBody)
                 .then((response) => {
-                    alert('Palestra editada com sucesso!')
                     console.log(response);
+                    alert('Palestra editada com sucesso!')
+                    this.redirectListTalks();
                 })
                 .catch((error) => {
-                    alert('Erro ao editar palestra!')
                     console.error(error);
+                    alert('Erro ao editar palestra!')
                 });
         },
         redirectListTalks() {
-            this.$router.push('/');
-        },
-        redirectCreateTalk() {
-            this.$router.push('/talk/new');
+            this.$router.push({ name: 'home' });
         },
     },
     beforeCreate() {
