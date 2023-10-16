@@ -1,15 +1,21 @@
 # Stant Frontend
 
-## Rotas
+## Url em producao
 
-- "/": Listagem de palestras
-- "/talk/new": Criacao de palestra
-- "/talk/{id}" Edicao de palestra
-- "/upload-file": Upload de arquivo de palestras
-- "/schedule": Cronograma das palestras
+```
+https://gerenciador-palestras.netlify.app
+```
 
-### Subir pagina
+## Subir projeto localmente
 
 ```
 npm run serve
 ```
+
+## Rotas
+
+- "/": Listagem de palestras
+- "/create-talk": Criacao de palestra
+- "/talk/{id}" Edicao de palestra
+- "/upload-file": Upload de arquivo de palestras
+- "/schedule": Cronograma das palestras
