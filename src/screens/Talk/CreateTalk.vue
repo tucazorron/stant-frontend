@@ -46,6 +46,7 @@ export default {
 				.then((response) => {
 					console.log(response);
 					alert('Palestra criada com sucesso!');
+					this.redirectListTalks();
 				})
 				.catch((error) => {
 					console.error(error);
