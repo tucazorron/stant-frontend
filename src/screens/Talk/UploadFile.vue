@@ -1,6 +1,14 @@
 <template>
-    <div>
+    <div class="centered-container">
         <PageTitle title="Upload de arquivo" />
+        <div class="buttons-row">
+            <button type="button" class="btn btn-primary" @click="redirectCreateTalk">
+                Criar palestra
+            </button>
+            <button type="button" class="btn btn-success" @click="redirectListTalks">
+                Listagem de palestras
+            </button>
+        </div>
         <input type="file" @change="handleFile" />
         <button type="button" class="btn btn-primary" @click="uploadFile()">Upload</button>
     </div>
@@ -37,6 +45,12 @@ export default {
                     alert('Erro ao enviar arquivo!')
                     console.error(error);
                 });
+        },
+        redirectCreateTalk() {
+            this.$router.push('/talk/new');
+        },
+        redirectListTalks() {
+            this.$router.push('/');
         },
     },
 };

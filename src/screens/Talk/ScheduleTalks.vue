@@ -1,6 +1,11 @@
 <template>
     <div class="centered-container">
         <PageTitle title="Cronograma das palestras" />
+        <div class="buttons-row">
+            <button type="button" class="btn btn-success" @click="redirectListTalks">
+                Listagem de palestras
+            </button>
+        </div>
         <div v-for="(track, index) in schedule" :key="index">
             <h2>Track {{ String.fromCharCode(65 + index) }}</h2>
             <table class="table table-dark table-striped">
@@ -37,6 +42,11 @@ export default {
             schedule: null,
             dataFetched: false,
         };
+    },
+    methods: {
+        redirectListTalks() {
+            this.$router.push('/');
+        },
     },
     beforeCreate() {
         axios.get(`${baseUrl}/schedule`)

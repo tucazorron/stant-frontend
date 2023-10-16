@@ -1,6 +1,11 @@
 <template>
 	<div class="centered-container">
 		<PageTitle title="Criar Palestra" />
+		<div class="buttons-row">
+			<button type="button" class="btn btn-success" @click="redirectListTalks">
+				Listagem de palestras
+			</button>
+		</div>
 		<form>
 			<div class="form-group mb-3">
 				<label for="title">Título</label>
@@ -46,6 +51,9 @@ export default {
 					alert('Erro ao criar palestra!')
 					console.error('API request failed:', error);
 				});
+		},
+		redirectListTalks() {
+			this.$router.push('/');
 		},
 	},
 };

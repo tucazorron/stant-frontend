@@ -1,9 +1,12 @@
 <template>
 	<div class="centered-container">
 		<PageTitle title="Palestras" />
-		<div style="display: flex; flex-direction: row;">
+		<div class="buttons-row">
 			<button type="button" class="btn btn-primary" @click="redirectCreateTalk">
 				Criar palestra
+			</button>
+			<button type="button" class="btn btn-primary" @click="redirectUploadFile">
+				Subir arquivo de palestras
 			</button>
 			<button type="button" class="btn btn-success" @click="redirectSchedule">
 				Criar cronograma de palestras
@@ -29,7 +32,7 @@
 						<td>{{ talk.title }}</td>
 						<td>{{ talk.duration }}</td>
 						<td>
-							<a class="icon-link" :href="`/talks/${talk.id}`">
+							<a class="icon-link" :href="`/talk/${talk.id}`">
 								<i class="fas fa-edit"></i>
 							</a>
 
@@ -75,31 +78,36 @@ export default {
 	methods: {
 		deleteTalk(id) {
 			axios.delete(`${baseUrl}/talks/${id}`)
-				.then((response) => {
-					console.log('Palestra deletada:', response.data);
+				.then(() => {
+					alert('Palestra deletada com sucesso!')
 					this.talks = this.talks.filter((talk) => talk.id !== id);
 					location.reload();
 				})
 				.catch((error) => {
-					console.error('API request failed:', error);
+					alert('Erro ao deletar palestra!')
+					console.error(error);
 				});
 		},
 		deleteAllTalks() {
 			axios.delete(`${baseUrl}/talks`)
-				.then((response) => {
-					console.log('Palestras deletadas:', response.data);
+				.then(() => {
+					alert('Todas as palestras foram deletadas com sucesso!')
 					this.talks = [];
 					location.reload();
 				})
 				.catch((error) => {
-					console.error('API request failed:', error);
+					alert('Erro ao deletar todas as palestras!')
+					console.error(error);
 				});
 		},
 		redirectSchedule() {
 			this.$router.push('/schedule');
 		},
 		redirectCreateTalk() {
-			this.$router.push('/create-talk');
+			this.$router.push('/talk/new');
+		},
+		redirectUploadFile() {
+			this.$router.push('/upload-file');
 		},
 	},
 };

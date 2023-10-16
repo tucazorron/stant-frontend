@@ -1,6 +1,14 @@
 <template>
     <div class="centered-container">
         <PageTitle title="Editar Palestra" />
+        <div class="buttons-row">
+            <button type="button" class="btn btn-success" @click="redirectListTalks">
+                Listagem de palestras
+            </button>
+            <button type="button" class="btn btn-primary" @click="redirectCreateTalk">
+                Criar palestra
+            </button>
+        </div>
         <form>
             <div class="form-group mb-3">
                 <label for="title">Título</label>
@@ -46,12 +54,16 @@ export default {
                     console.error(error);
                 });
         },
+        redirectListTalks() {
+            this.$router.push('/');
+        },
+        redirectCreateTalk() {
+            this.$router.push('/talk/new');
+        },
     },
     beforeCreate() {
         axios.get(`${baseUrl}/talks/${this.$route.params.id}`)
             .then((response) => {
-                console.log(response.data);
-                alert('Palestra encontrada com sucesso!')
                 this.requestBody = response.data;
             })
             .catch((error) => {

@@ -19,6 +19,13 @@ export default {
   margin-right: 25%;
 }
 
+.buttons-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  margin-bottom: 2em;
+}
+
 .text-right {
   text-align: right;
   padding-right: 25px;

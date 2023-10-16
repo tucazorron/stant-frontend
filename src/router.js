@@ -12,12 +12,12 @@ const routes = [
         component: ListTalks,
     },
     {
-        path: "/create-talk",
+        path: "/talk/new",
         name: "create-talk",
         component: CreateTalk,
     },
     {
-        path: "/edit-talk/:id",
+        path: "/talk/:id",
         name: "edit-talk",
         component: EditTalk,
     },

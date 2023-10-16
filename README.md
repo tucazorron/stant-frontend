@@ -1,24 +1,15 @@
-# frontend
+# Stant Frontend
 
-## Project setup
-```
-npm install
-```
+## Rotas
 
-### Compiles and hot-reloads for development
+- "/": Listagem de palestras
+- "/talk/new": Criacao de palestra
+- "/talk/{id}" Edicao de palestra
+- "/upload-file": Upload de arquivo de palestras
+- "/schedule": Cronograma das palestras
+
+### Subir pagina
+
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
