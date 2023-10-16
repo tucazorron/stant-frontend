@@ -2,28 +2,33 @@ import { createRouter, createWebHistory } from "vue-router";
 import CreateTalk from "./screens/Talk/CreateTalk.vue";
 import ListTalks from "./screens/Talk/ListTalks.vue";
 import ScheduleTalks from "./screens/Talk/ScheduleTalks.vue";
-import ShowTalk from "./screens/Talk/ShowTalk.vue";
+import EditTalk from "./screens/Talk/EditTalk.vue";
 import UploadFile from "./screens/Talk/UploadFile.vue";
 
 const routes = [
     {
-        path: "/talks",
+        path: "/",
+        name: "home",
         component: ListTalks,
     },
     {
-        path: "/talks/new",
+        path: "/create-talk",
+        name: "create-talk",
         component: CreateTalk,
     },
     {
-        path: "/talks/:id",
-        component: ShowTalk,
+        path: "/edit-talk/:id",
+        name: "edit-talk",
+        component: EditTalk,
     },
     {
-        path: "/talks/upload-file",
+        path: "/upload-file",
+        name: "upload-file",
         component: UploadFile,
     },
     {
-        path: "/talks/schedule",
+        path: "/schedule",
+        name: "schedule",
         component: ScheduleTalks,
     },
 ];

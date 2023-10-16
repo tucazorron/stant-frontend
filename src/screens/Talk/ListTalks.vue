@@ -1,11 +1,11 @@
 <template>
 	<div class="centered-container">
 		<PageTitle title="Palestras" />
-		<div margin-bottom="10px">
-			<button type="button" class="btn btn-primary" @click="createNewTalk">
+		<div style="display: flex; flex-direction: row;">
+			<button type="button" class="btn btn-primary" @click="redirectCreateTalk">
 				Criar palestra
 			</button>
-			<button type="button" class="btn btn-success" @click="renderSchedule">
+			<button type="button" class="btn btn-success" @click="redirectSchedule">
 				Criar cronograma de palestras
 			</button>
 			<button type="button" class="btn btn-danger" @click="deleteAllTalks">
@@ -29,7 +29,7 @@
 						<td>{{ talk.title }}</td>
 						<td>{{ talk.duration }}</td>
 						<td>
-							<a class="icon-link" :href="`/talk/${talk.id}`">
+							<a class="icon-link" :href="`/talks/${talk.id}`">
 								<i class="fas fa-edit"></i>
 							</a>
 
@@ -66,7 +66,6 @@ export default {
 		axios.get(`${baseUrl}/talks`)
 			.then((response) => {
 				this.talks = response.data;
-				console.log('Talks:', this.talks);
 				this.dataFetched = true;
 			})
 			.catch((error) => {
@@ -96,32 +95,12 @@ export default {
 					console.error('API request failed:', error);
 				});
 		},
-		renderSchedule() {
+		redirectSchedule() {
 			this.$router.push('/schedule');
-			// axios.get(`${baseUrl}/schedule`)
-			// 	.then((response) => {
-			// 		console.log('Cronograma:', response.data);
-			// 		this.talks = response.data;
-			// 		this.dataFetched = true;
-			// 	})
-			// 	.catch((error) => {
-			// 		console.error('API request failed:', error);
-			// 	});
 		},
-		createNewTalk() {
-			this.$router.push('/talk/new');
+		redirectCreateTalk() {
+			this.$router.push('/create-talk');
 		},
 	},
 };
 </script>
-
-  
-<style scoped>
-.centered-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-</style>
-  

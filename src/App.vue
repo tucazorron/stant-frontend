@@ -1,15 +1,26 @@
 <template>
-  <div id="app" class="dark-theme">
-    <ListTalks />
+  <div id="app">
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import ListTalks from "@/screens/Talk/ListTalks.vue";
 export default {
   name: "App",
-  components: {
-    ListTalks,
-  },
 };
 </script>
+
+<style>
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.text-right {
+  text-align: right;
+  padding-right: 25px;
+}
+</style>

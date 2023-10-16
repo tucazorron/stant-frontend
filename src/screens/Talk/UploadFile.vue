@@ -1,15 +1,42 @@
 <template>
     <div>
-        <input type="file" @change="handleFileUpload" />
+        <PageTitle title="Upload de arquivo" />
+        <input type="file" @change="handleFile" />
+        <button type="button" class="btn btn-primary" @click="uploadFile()">Upload</button>
     </div>
 </template>
   
 <script>
+import axios from "axios";
+import { baseUrl } from "../constants";
+import PageTitle from "@/components/PageTitle.vue";
 export default {
+    name: "UploadFile",
+    components: {
+        PageTitle,
+    },
+    data() {
+        return {
+            file: null,
+        }
+    },
     methods: {
-        handleFileUpload(event) {
-            const selectedFile = event.target.files[0];
-            console.log("Selected file:", selectedFile);
+        handleFile(event) {
+            this.file = event.target.files[0];
+
+        },
+        uploadFile() {
+            const formData = new FormData();
+            formData.append('file', this.file);
+            axios.post(`${baseUrl}/upload-file`, formData)
+                .then((response) => {
+                    alert('Arquivo enviado com sucesso!')
+                    console.log(response);
+                })
+                .catch((error) => {
+                    alert('Erro ao enviar arquivo!')
+                    console.error(error);
+                });
         },
     },
 };
