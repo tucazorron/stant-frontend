@@ -6,7 +6,7 @@
 				Listagem de palestras
 			</button>
 		</div>
-		<form>
+		<form @submit.prevent="createTalk()">
 			<div class="form-group mb-3">
 				<label for="title">Título</label>
 				<input v-model="requestBody.title" type="text" class="form-control" id="title"
@@ -17,7 +17,7 @@
 				<input v-model="requestBody.duration" type="text" class="form-control" id="duration"
 					placeholder="Duração da palestra">
 			</div>
-			<button type="submit" class="btn btn-primary" @click="createTalk()">Criar palestra</button>
+			<button type="submit" class="btn btn-primary">Criar palestra</button>
 		</form>
 	</div>
 </template>
